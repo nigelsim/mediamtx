@@ -268,6 +268,12 @@ ffmpeg -re -stream_loop -1 -i file.ts -c copy -f rtsp -rtsp_transport tcp rtsp:/
 
 The resulting stream will be available in path `/mystream`.
 
+Ensure the input does not contain B-frames, at least for WebRTC with H264. To remove B-frames from your file with ffmpeg use the `-bf 0` parameter:
+
+```sh
+ffmpeg -i input.ts -vcodec libx264 -bf 0 output.ts
+```
+
 #### GStreamer
 
 GStreamer can publish a stream to the server in multiple ways (SRT client, SRT server, RTSP client, RTMP client, UDP/MPEG-TS, WebRTC with WHIP). The recommended one consists in publishing as a [RTSP client](#rtsp-clients):
